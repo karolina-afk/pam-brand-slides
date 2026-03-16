@@ -1,0 +1,1260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PCL Master Deck</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* 1. THE SETUP */
+        * {
+            box-sizing: border-box;
+        }
+
+        p {
+            margin: 0;
+            margin-bottom: 15px;
+        }
+
+        body {
+            background-color: #d1d5db;
+            display: grid;
+            gap: 30px;
+            grid-template-columns: 1fr;
+            margin: 0;
+            min-height: 100vh;
+            padding: 30px 0;
+            place-items: center;
+        }
+
+        .slide-container {
+            align-items: flex-start;
+            background-color: #EFE9E7;
+            border-radius: 0px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+            display: flex;
+            flex-direction: column;
+            font-family: 'Lora', serif;
+            height: 720px;
+            justify-content: center;
+            overflow: hidden;
+            padding: 60px 80px;
+            position: relative;
+            width: 1280px;
+        }
+
+        .slide-container::before {
+            content: '';
+            height: 100%;
+            left: 0;
+            position: absolute;
+            top: 0;
+            width: 100%;
+            z-index: 0;
+        }
+
+        .slide-container > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .theme-dark {
+            background-color: #132A13;
+        }
+        
+        .theme-accent {
+            background-color: #6BA292;
+        }
+
+        /* --- BRAND LOGO --- */
+        .brand-logo {
+            height: 80px;
+            width: auto;
+            margin-bottom: 30px;
+            object-fit: contain;
+            display: block;
+        }
+
+        .theme-dark .brand-logo {
+            mix-blend-mode: screen;
+        }
+
+        .theme-light .brand-logo {
+            filter: invert(1);
+            mix-blend-mode: multiply;
+        }
+
+        .theme-accent .brand-logo {
+            mix-blend-mode: screen;
+        }
+
+        /* 2. CONSISTENT TYPOGRAPHY & ALIGNMENT */
+        .slide-container h1,
+        .slide-container h2,
+        .slide-container h3,
+        .slide-container .number,
+        .slide-container blockquote {
+            color: #132A13;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 500;
+            margin: 0;
+            padding: 0;
+            text-align: left;
+        }
+
+        .theme-dark h1,
+        .theme-dark h2,
+        .theme-dark h3,
+        .theme-dark .number,
+        .theme-dark blockquote,
+        .theme-accent h1,
+        .theme-accent h2,
+        .theme-accent h3,
+        .theme-accent .number,
+        .theme-accent blockquote {
+            color: #EFE9E7;
+        }
+
+        .slide-container p,
+        .slide-container li,
+        .slide-container .subtitle,
+        .slide-container .number-label,
+        .slide-container .legend li,
+        .slide-container .chart-summary,
+        .slide-container .bar .label,
+        .slide-container th,
+        .slide-container td,
+        .slide-container .alternating-text-tile p,
+        .slide-container .bleed-text-side p,
+        .slide-container cite,
+        .slide-container .contact-info {
+            color: #132A13;
+            font-family: 'Lora', serif;
+            font-weight: 400;
+            text-align: left;
+        }
+
+        .theme-dark p,
+        .theme-dark li,
+        .theme-dark .subtitle,
+        .theme-dark .number-label,
+        .theme-dark .legend li,
+        .theme-dark .chart-summary,
+        .theme-dark .bar .label,
+        .theme-dark th,
+        .theme-dark td,
+        .theme-dark .alternating-text-tile p,
+        .theme-dark .bleed-text-side p,
+        .theme-dark cite,
+        .theme-dark .contact-info,
+        .theme-accent p,
+        .theme-accent li,
+        .theme-accent .subtitle,
+        .theme-accent .number-label,
+        .theme-accent .legend li,
+        .theme-accent .chart-summary,
+        .theme-accent .bar .label,
+        .theme-accent th,
+        .theme-accent td,
+        .theme-accent .alternating-text-tile p,
+        .theme-accent .bleed-text-side p,
+        .theme-accent cite,
+        .theme-accent .contact-info {
+            color: #EFE9E7;
+            opacity: 0.9;
+        }
+
+        .slide-container h1 {
+            font-size: 84px;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        .slide-container .slide-title {
+            font-size: 56px;
+            font-weight: 500;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(19, 42, 19, 0.25);
+            width: 100%;
+            line-height: 1.2;
+        }
+
+        .theme-dark .slide-title,
+        .theme-accent .slide-title {
+            border-bottom: 1px solid rgba(239, 233, 231, 0.25);
+        }
+
+        .slide-container h3 {
+            font-size: 32px;
+            font-weight: 500;
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+
+        .slide-container p,
+        .slide-container li,
+        .slide-container th,
+        .slide-container td {
+            font-size: 20px;
+            line-height: 1.6;
+        }
+
+        .slide-container .subtitle {
+            font-size: 28px;
+            font-weight: 400;
+            margin: 0; 
+            padding: 0;
+            font-style: italic;
+            opacity: 0.8;
+        }
+
+        .slide-container .content-area {
+            align-items: flex-start;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            justify-content: center;
+            width: 100%;
+        }
+
+        /* 3. LAYOUT DEFINITIONS */
+        .title-layout {
+            text-align: left;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .section-diagonal-layout {
+            align-items: flex-start;
+            padding: 0; 
+            overflow: hidden;
+        }
+
+        .section-diagonal-layout .content-layer {
+            padding: 60px 80px;
+            width: 50%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            z-index: 3;
+        }
+
+        .section-diagonal-layout .image-layer {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            clip-path: polygon(33.33% 0, 100% 0, 100% 100%, 75% 100%);
+            z-index: 0;
+        }
+
+        .section-diagonal-layout .image-layer img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .section-diagonal-layout .image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(19, 42, 19, 0.75);
+            z-index: 1;
+        }
+
+        .section-diagonal-layout .diagonal-edge {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .section-diagonal-layout h2 {
+            font-size: 72px;
+            margin-bottom: 10px;
+            border: none;
+            padding-bottom: 0;
+        }
+
+        .section-diagonal-layout p {
+            font-size: 32px;
+            margin: 0;
+            opacity: 0.8;
+        }
+
+        .two-column {
+            align-items: flex-start;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            width: 100%;
+        }
+
+        .two-column.tiled {
+            align-items: stretch;
+            gap: 40px;
+        }
+
+        .two-column.tiled > div {
+            padding: 40px;
+            text-align: left;
+            border-top: none; 
+        }
+
+        .theme-light .two-column.tiled > div {
+            background-color: rgba(255, 255, 255, 0.4);
+            border: 1px solid rgba(19, 42, 19, 0.1);
+        }
+
+        .theme-dark .two-column.tiled > div {
+            background-color: rgba(239, 233, 231, 0.05);
+            border: 1px solid rgba(239, 233, 231, 0.1);
+        }
+
+        .theme-accent .two-column.tiled > div {
+            background-color: rgba(239, 233, 231, 0.15);
+            border: 1px solid rgba(239, 233, 231, 0.2);
+        }
+
+        .two-column ul {
+            list-style: none;
+            margin: 0;
+            padding-left: 0;
+        }
+
+        .two-column li {
+            margin-bottom: 20px;
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .two-column li::before {
+            content: '—';
+            position: absolute;
+            left: 0;
+            color: #E59500;
+            font-weight: bold;
+        }
+
+        .image-wrapper {
+            height: 400px;
+            max-width: 100%;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .image-wrapper img {
+            height: 100%;
+            max-width: 100%;
+            object-fit: cover;
+            width: 100%;
+        }
+
+        .rounded-image-layout {
+            align-items: center;
+        }
+
+        .rounded-image-layout .image-wrapper {
+            border-radius: 50%;
+            flex-shrink: 0;
+            height: 380px;
+            width: 380px;
+            max-width: 380px;
+            margin: 0 auto;
+            border: 4px solid #E59500;
+            padding: 10px;
+        }
+
+        .rounded-image-layout .image-wrapper img {
+            border-radius: 50%;
+            object-fit: cover;
+            height: 100%;
+            width: 100%;
+        }
+
+        .slide-container.bleed-image-layout {
+            align-items: start;
+            display: grid;
+            gap: 0;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            padding: 0;
+        }
+
+        .slide-container.bleed-image-layout > .content-container {
+            padding: 80px 60px 80px 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100%;
+        }
+
+        .slide-container.bleed-image-layout > .image-container {
+            height: 100%;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .slide-container.bleed-image-layout img.bleed-image-side {
+            display: block;
+            height: 720px;
+            object-fit: cover;
+            object-position: center;
+            width: 100%;
+        }
+
+        .slide-container.bleed-image-layout .bleed-text-side {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: left;
+        }
+
+        .tiled-content {
+            align-items: stretch;
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .tile {
+            align-items: flex-start;
+            background-color: transparent;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            justify-content: flex-start;
+            padding: 30px 10px 10px 0;
+            text-align: left;
+        }
+
+        .tile .icon {
+            color: #E59500;
+            font-size: 36px;
+            margin-bottom: 25px;
+        }
+
+        .highlight-numbers-layout {
+            align-items: center;
+        }
+
+        .highlight-numbers-layout > div:first-child {
+            flex: 0 0 45%;
+            text-align: left;
+        }
+
+        .stat-card {
+            background-color: #FFFFFF;
+            border: 1px solid rgba(19, 42, 19, 0.1);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+            padding: 50px 40px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .theme-dark .stat-card {
+            background-color: rgba(239, 233, 231, 0.05);
+            border-color: rgba(239, 233, 231, 0.1);
+        }
+
+        .highlight-numbers-layout .number {
+            color: #E59500;
+            font-size: 160px;
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+
+        .theme-dark .highlight-numbers-layout .number {
+            color: #E59500;
+        }
+
+        .highlight-numbers-layout .number-label {
+            font-size: 28px;
+            font-style: italic;
+        }
+
+        .quote-layout {
+            margin: 0 auto;
+            text-align: left;
+            width: 85%;
+        }
+
+        .quote-layout blockquote {
+            font-size: 54px;
+            line-height: 1.3;
+            margin: 0 0 30px 0;
+            position: relative;
+            text-align: center;
+        }
+
+        .quote-layout cite {
+            display: block;
+            text-align: center;
+            font-size: 24px;
+            font-style: italic;
+            opacity: 0.8;
+        }
+
+        /* Designer Overlapping Chart for Slide 12 */
+        .chart-layout {
+            display: flex;
+            width: 100%;
+            align-items: stretch;
+            justify-content: space-between;
+            gap: 30px;
+        }
+        
+        .chart-card {
+            background-color: #FFFFFF;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(19, 42, 19, 0.08);
+            border-top: 4px solid #132A13;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chart-card-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 28px;
+            color: #132A13;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(19, 42, 19, 0.1);
+            padding-bottom: 15px;
+        }
+
+        .designer-chart-wrapper {
+            display: flex;
+            width: 100%;
+            flex-grow: 1;
+            min-height: 300px;
+            position: relative;
+            margin-top: 10px;
+            padding-left: 20px;
+        }
+        
+        .dc-y-axis {
+            position: absolute;
+            left: -10px;
+            top: 40px;
+            bottom: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding-bottom: 35px;
+            font-family: 'Lora', serif;
+            font-size: 14px;
+            color: #132A13;
+            opacity: 0.5;
+        }
+        
+        .dc-grid-lines {
+            position: absolute;
+            left: 20px;
+            right: 0;
+            top: 40px;
+            bottom: 35px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            pointer-events: none;
+        }
+        
+        .dc-grid-line {
+            width: 100%;
+            border-top: 1px dashed rgba(107, 162, 146, 0.4);
+        }
+        
+        .dc-columns {
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-end;
+            width: 100%;
+            height: calc(100% - 75px);
+            margin-top: 40px; 
+            position: relative;
+            z-index: 1;
+        }
+        
+        .dc-col {
+            position: relative;
+            height: 100%;
+            width: 90px;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .dc-presence {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background-color: rgba(107, 162, 146, 0.15); 
+            border: 1px solid rgba(107, 162, 146, 0.3);
+            border-bottom: none;
+            transition: all 0.3s ease;
+        }
+        
+        .dc-importance {
+            position: absolute;
+            bottom: 0;
+            width: 36px;
+            background: linear-gradient(180deg, #132A13 0%, #204020 100%);
+            box-shadow: 4px 0 15px rgba(19, 42, 19, 0.25);
+            display: flex;
+            justify-content: center;
+        }
+
+        .dc-value-label {
+            position: absolute;
+            top: -40px;
+            width: 100%;
+            text-align: center;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 28px;
+            font-weight: 600;
+            color: #E59500;
+        }
+        
+        .dc-x-label {
+            position: absolute;
+            bottom: -35px;
+            text-align: center;
+            width: 100%;
+            font-family: 'Lora', serif;
+            font-size: 15px;
+            color: #132A13;
+            font-weight: 500;
+        }
+        
+        .dc-legend {
+            display: flex;
+            gap: 30px;
+            margin-top: 30px;
+            justify-content: center;
+        }
+        
+        .dc-legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Lora', serif;
+            font-size: 15px;
+            color: #132A13;
+        }
+        
+        .dc-legend-color {
+            width: 16px;
+            height: 16px;
+            border-radius: 2px;
+        }
+        
+        .dc-legend-imp {
+            background-color: #132A13;
+        }
+        
+        .dc-legend-pres {
+            background-color: rgba(107, 162, 146, 0.25);
+            border: 1px solid rgba(107, 162, 146, 0.5);
+        }
+
+        /* Infographic Filters Sidebar */
+        .chart-sidebar {
+            background-color: #FFFFFF;
+            width: 260px;
+            padding: 35px 30px;
+            box-shadow: 0 20px 40px rgba(19, 42, 19, 0.08);
+            border-top: 4px solid #6BA292;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .filter-header {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 24px;
+            color: #132A13;
+            margin-bottom: 25px;
+            border-bottom: 1px solid rgba(19, 42, 19, 0.1);
+            padding-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .filter-group-title {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #6BA292;
+            margin-bottom: 12px;
+            font-weight: 600;
+            font-family: 'Lora', serif;
+        }
+        
+        .filter-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 30px;
+        }
+        
+        .filter-tag {
+            font-family: 'Lora', serif;
+            font-size: 13px;
+            padding: 6px 14px;
+            border: 1px solid rgba(19, 42, 19, 0.15);
+            color: #132A13;
+            background-color: transparent;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .filter-tag.active {
+            background-color: #132A13;
+            color: #EFE9E7;
+            border-color: #132A13;
+            box-shadow: 0 4px 10px rgba(19, 42, 19, 0.2);
+        }
+        
+        .filter-tag.active-secondary {
+            background-color: #E59500;
+            color: #132A13;
+            border-color: #E59500;
+            font-weight: 600;
+            box-shadow: 0 4px 10px rgba(229, 149, 0, 0.2);
+        }
+
+        .area-chart-container {
+            padding: 20px 0;
+            width: 100%;
+        }
+
+        .area-chart-svg {
+            height: auto;
+            overflow: visible;
+            width: 100%;
+        }
+
+        .area-chart-svg .grid {
+            stroke-width: 1;
+            stroke: rgba(239, 233, 231, 0.2);
+        }
+
+        .area-chart-svg .line-stroke-1 {
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            stroke-width: 4;
+            stroke: #E59500;
+        }
+        
+        .area-chart-svg .line-stroke-2 {
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            stroke-width: 4;
+            stroke: #6BA292;
+        }
+
+        .area-chart-svg .data-point-1 {
+            fill: #132A13;
+            stroke-width: 3;
+            stroke: #E59500;
+        }
+        
+        .area-chart-svg .data-point-2 {
+            fill: #132A13;
+            stroke-width: 3;
+            stroke: #6BA292;
+        }
+
+        .area-chart-svg .axis-labels {
+            fill: #EFE9E7;
+            font-size: 16px;
+            font-family: 'Lora', serif;
+            opacity: 0.8;
+        }
+
+        .area-chart-svg .y-axis-labels {
+            text-anchor: end;
+        }
+
+        .area-chart-svg .x-axis-labels {
+            text-anchor: middle;
+        }
+
+        .full-bg-image {
+            background-position: center;
+            background-size: cover;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .full-bg-image .content-overlay {
+            text-align: center;
+            background-color: rgba(19, 42, 19, 0.85);
+            padding: 60px;
+            border: 1px solid rgba(239, 233, 231, 0.2);
+            max-width: 900px;
+        }
+
+        .full-bg-image h2,
+        .full-bg-image p {
+            color: #EFE9E7;
+        }
+
+        .qa-layout {
+            margin: 0;
+            text-align: left;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .qa-layout h2 {
+            font-size: 72px;
+            margin-bottom: 20px;
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .qa-layout p {
+            font-size: 28px;
+            margin-bottom: 40px;
+        }
+
+        .qa-layout .contact-info {
+            font-size: 20px;
+            opacity: 0.8;
+            line-height: 1.8;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Slide 1: Title_Slide (Dark Master) -->
+<div class="slide-container theme-dark" id="slide1">
+    <div class="title-layout">
+        <img src="https://raw.githubusercontent.com/karolina-afk/Pam-logos/main/Untitled%20(3).png" class="brand-logo" alt="PCL Logo">
+        <h1>People Centric<br>Leadership.</h1>
+        <p class="subtitle">Rooted in evidence. Built for connection.</p>
+    </div>
+</div>
+
+<!-- Slide 2: Title_Slide (Light Master) -->
+<div class="slide-container theme-light" id="slide2">
+    <div class="title-layout">
+        <img src="https://raw.githubusercontent.com/karolina-afk/Pam-logos/main/Untitled%20(3).png" class="brand-logo" alt="PCL Logo">
+        <h1>People Centric<br>Leadership.</h1>
+        <p class="subtitle">Rooted in evidence. Built for connection.</p>
+    </div>
+</div>
+
+<!-- Slide 3: Section Title 1 (Diagonal Intro) -->
+<div class="slide-container theme-dark section-diagonal-layout" id="slide3">
+    <div class="image-layer">
+        <img src="https://raw.githubusercontent.com/karolina-afk/Pam-logos/main/Gemini_Generated_Image_pa4q7cpa4q7cpa4q.png" alt="Nature landscape">
+        <div class="image-overlay"></div>
+    </div>
+    <!-- Diagonal Line Accent (Golden Orange) -->
+    <svg class="diagonal-edge" viewBox="0 0 1280 720">
+        <line x1="426.66" y1="0" x2="960" y2="720" stroke="#E59500" stroke-width="2" />
+    </svg>
+    <div class="content-layer">
+        <img src="https://raw.githubusercontent.com/karolina-afk/Pam-logos/main/Untitled%20(3).png" class="brand-logo" alt="PCL Logo">
+        <p class="subtitle" style="margin-bottom: 10px;">Section One:</p>
+        <h2>Introduction</h2>
+    </div>
+</div>
+
+<!-- Slide 4: Rounded_Image_and_Text (Headshot/Bio Template) -->
+<div class="slide-container theme-light" id="slide4">
+    <h2 class="slide-title">Leadership Team</h2>
+    <div class="content-area">
+        <div class="two-column rounded-image-layout">
+            <div>
+                <div class="image-wrapper">
+                    <img src="https://raw.githubusercontent.com/karolina-afk/Pam-logos/main/casey-horner-OopzSWabsWE-unsplash.jpg" alt="Professional candid headshot of a woman">
+                </div>
+            </div>
+            <div>
+                <h3>Pamela Doherty</h3>
+                <p style="font-style: italic; margin-bottom: 20px;">Chief Executive Officer.</p>
+                <p>PCL carries the poise of a seasoned leader and the soul of a storyteller. We listen to what people truly value, observe what they tell us without judgement, and equip people to connect with each other through credible evidence.</p>
+                <p>Pamela's conviction, built over decades of leadership experience, is that understanding what people truly value is one of the most powerful tools we have for bringing people together.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 5: Two_Column_Tiled_Text (Light Master) -->
+<div class="slide-container theme-light" id="slide5">
+    <h2 class="slide-title">Two Column Layout (Light)</h2>
+    <div class="content-area">
+        <div class="two-column tiled">
+            <div>
+                <h3>Grounded & Human</h3>
+                <p>We are living in a world that increasingly exploits our differences. Division is loud. Connection takes work. People Centric Leadership exists because of a conviction.</p>
+                <p>The brand doesn't shout, oversell, or perform. It shows up fully, speaks with purpose, and always leaves room for others. Like wind, it adapts and flows through resistance with calm, grounded articulation.</p>
+            </div>
+            <div>
+                <h3>Precise & Warm</h3>
+                <p>PCL delivers freely accessible, evidence-first research reports and leadership insights that bridge the gap between abstract academic research and commercial consultancy.</p>
+                <p>Its unique lens explores not just what people value, but how similar or different they believe others' values to be. Every product is designed to make rigorous evidence feel accessible.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 6: Two_Column_Tiled_Text (Dark Master) -->
+<div class="slide-container theme-dark" id="slide6">
+    <h2 class="slide-title">Two Column Layout (Dark)</h2>
+    <div class="content-area">
+        <div class="two-column tiled">
+            <div>
+                <h3>Quietly Courageous</h3>
+                <p>PCL is independent and self-funded, partnering only with organisations whose values align with its own. It operates across sectors and generations.</p>
+                <p>Proactively seeking new audiences rather than waiting for them to arrive, it serves as a megaphone for people's voices, never the judge of their values.</p>
+            </div>
+            <div>
+                <h3>Purposefully Warm</h3>
+                <p>Our visual language carries symbols woven covertly throughout the brand identity. Three stars denoting excellence, achievement, and noble aspirations.</p>
+                <p>Open circles and gathering—people seated in circles, doorways, and thresholds—reinforcing the commitment to never being a closed club.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 7: Two_Column_Tiled_Text (Teal Accent Master) -->
+<div class="slide-container theme-accent" id="slide7">
+    <h2 class="slide-title">Accent Column Layout</h2>
+    <div class="content-area">
+        <div class="two-column tiled">
+            <div>
+                <p><strong>Primary Attributes:</strong></p>
+                <ul>
+                    <li>Freely accessible, evidence-first research.</li>
+                    <li>Independent, self-funded partnerships.</li>
+                    <li>Grounded warmth and quiet courage.</li>
+                    <li>Editorial typography and golden accents.</li>
+                </ul>
+            </div>
+            <div>
+                <p><strong>Extended Offerings:</strong></p>
+                <ul>
+                    <li>Workshops and advisory sessions.</li>
+                    <li>Sector-specific leadership materials.</li>
+                    <li>Youth outreach tools and insights.</li>
+                    <li>Proactive audience-seeking initiatives.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 8: Bleed_Image_Right (1/2 Split Layout) -->
+<div class="slide-container bleed-image-layout theme-light" id="slide8">
+    <div class="content-container">
+        <h2 class="slide-title">See the Whole Person</h2>
+        <div class="content-area">
+            <div class="bleed-text-side">
+                <p>Candid and raw, with warmth and intention. PCL photography should feel like a documentary filmmaker captured a genuine moment of connection.</p>
+                <p>Subjects are real people in real settings—never actors in staged boardrooms. Lighting is natural and directional; golden-hour warmth that adds depth and honesty.</p>
+            </div>
+        </div>
+    </div>
+    <div class="image-container">
+        <img class="bleed-image-side" src="https://raw.githubusercontent.com/karolina-afk/Pam-logos/main/nathan-dumlao-EwaV3HjwmUo-unsplash.jpg" alt="Silhouette of a person watching the sunrise over a city skyline">
+    </div>
+</div>
+
+<!-- Slide 9: Section Title 2 (Diagonal Data) -->
+<div class="slide-container theme-dark section-diagonal-layout" id="slide9">
+    <div class="image-layer">
+        <img src="https://raw.githubusercontent.com/karolina-afk/Pam-logos/main/Gemini_Generated_Image_oviqmtoviqmtoviq.png" alt="Abstract concept image">
+        <div class="image-overlay"></div>
+    </div>
+    <!-- Diagonal Line Accent -->
+    <svg class="diagonal-edge" viewBox="0 0 1280 720">
+        <line x1="426.66" y1="0" x2="960" y2="720" stroke="#E59500" stroke-width="2" />
+    </svg>
+    <div class="content-layer">
+        <img src="https://raw.githubusercontent.com/karolina-afk/Pam-logos/main/Untitled%20(3).png" class="brand-logo" alt="PCL Logo">
+        <p class="subtitle" style="margin-bottom: 10px;">Section Two:</p>
+        <h2>Data & Insights</h2>
+    </div>
+</div>
+
+<!-- Slide 10: Tiled_Text_With_Icons (Brand Matrix) -->
+<div class="slide-container theme-dark" id="slide10">
+    <h2 class="slide-title">Brand Matrix</h2>
+    <div class="content-area">
+        <div class="tiled-content">
+            <div class="tile">
+                <div class="icon"><i class="fa-solid fa-book-open"></i></div>
+                <h3>As Product</h3>
+                <p>Freely accessible, evidence-first research reports and leadership insights. Workshops, advisory sessions, and youth outreach tools bridging research and consultancy.</p>
+            </div>
+            <div class="tile">
+                <div class="icon"><i class="fa-solid fa-users"></i></div>
+                <h3>As Organisation</h3>
+                <p>Independent, self-funded, values-aligned partnerships only. Cross-sector, multi-generational reach with proactive audience-seeking.</p>
+            </div>
+            <div class="tile">
+                <div class="icon"><i class="fa-solid fa-compass"></i></div>
+                <h3>Personality</h3>
+                <p>Grounded warmth, quiet courage, purposeful restraint. Human precision paired with humble authority and an exploratory spirit.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 11: Highlighted_Numbers (Data Insights Master) -->
+<div class="slide-container theme-light" id="slide11">
+    <h2 class="slide-title">Data Insights</h2>
+    <div class="content-area">
+        <div class="two-column highlight-numbers-layout">
+            <div class="stat-card">
+                <div class="number">82%</div>
+                <div class="number-label">Shared Core Values</div>
+            </div>
+            <div>
+                <h3>What your people believe might surprise you.</h3>
+                <p>Values aren't soft. They're the most powerful data you're not using. The gap between leaders and people is smaller than you think. We measure it, and we help you bridge it through rigorous, accessible evidence.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 12: Designer Overlapping Bar Chart -->
+<div class="slide-container theme-light" id="slide12">
+    <h2 class="slide-title" style="font-size: 42px;">Importance and experience of workplace values.</h2>
+    <div class="content-area" style="justify-content: flex-start; padding-top: 10px;">
+        
+        <div class="chart-layout">
+            <!-- Chart Card -->
+            <div class="chart-card">
+                <h3 class="chart-card-title">Value Gap Analysis</h3>
+                <div class="designer-chart-wrapper">
+                    <div class="dc-y-axis">
+                        <span>5</span><span>4</span><span>3</span><span>2</span><span>1</span><span>0</span>
+                    </div>
+                    <div class="dc-grid-lines">
+                        <div class="dc-grid-line"></div>
+                        <div class="dc-grid-line"></div>
+                        <div class="dc-grid-line"></div>
+                        <div class="dc-grid-line"></div>
+                        <div class="dc-grid-line"></div>
+                        <div class="dc-grid-line" style="border-top: 1px solid rgba(19, 42, 19, 0.2);"></div>
+                    </div>
+                    
+                    <div class="dc-columns">
+                        <!-- Flexibility -->
+                        <div class="dc-col">
+                            <div class="dc-presence" style="height: 50%;"></div>
+                            <div class="dc-importance" style="height: 100%;">
+                                <div class="dc-value-label">5.0</div>
+                            </div>
+                            <div class="dc-x-label">Flexibility</div>
+                        </div>
+                        <!-- Recognition -->
+                        <div class="dc-col">
+                            <div class="dc-presence" style="height: 66%;"></div>
+                            <div class="dc-importance" style="height: 82%;">
+                                <div class="dc-value-label">4.1</div>
+                            </div>
+                            <div class="dc-x-label">Recognition</div>
+                        </div>
+                        <!-- Respect -->
+                        <div class="dc-col">
+                            <div class="dc-presence" style="height: 60%;"></div>
+                            <div class="dc-importance" style="height: 80%;">
+                                <div class="dc-value-label">4.0</div>
+                            </div>
+                            <div class="dc-x-label">Respect</div>
+                        </div>
+                        <!-- Transparency -->
+                        <div class="dc-col">
+                            <div class="dc-presence" style="height: 74%;"></div>
+                            <div class="dc-importance" style="height: 80%;">
+                                <div class="dc-value-label">4.0</div>
+                            </div>
+                            <div class="dc-x-label">Transparency</div>
+                        </div>
+                        <!-- Purpose -->
+                        <div class="dc-col">
+                            <div class="dc-presence" style="height: 88%;"></div>
+                            <div class="dc-importance" style="height: 78%;">
+                                <div class="dc-value-label">3.9</div>
+                            </div>
+                            <div class="dc-x-label">Purpose</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dc-legend">
+                    <div class="dc-legend-item">
+                        <div class="dc-legend-color dc-legend-imp"></div>
+                        <span>Importance</span>
+                    </div>
+                    <div class="dc-legend-item">
+                        <div class="dc-legend-color dc-legend-pres"></div>
+                        <span>Presence</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Infographic Filters Sidebar -->
+            <div class="chart-sidebar">
+                <div class="filter-header">Data Controls</div>
+                
+                <div class="filter-group-title">Perspective</div>
+                <div class="filter-tags">
+                    <div class="filter-tag active">Self view</div>
+                    <div class="filter-tag">Org view</div>
+                </div>
+
+                <div class="filter-group-title">Age Group</div>
+                <div class="filter-tags">
+                    <div class="filter-tag active-secondary">18-30</div>
+                    <div class="filter-tag">31-40</div>
+                    <div class="filter-tag">41-50</div>
+                    <div class="filter-tag">51-60</div>
+                    <div class="filter-tag">60+</div>
+                </div>
+
+                <div class="filter-group-title">Demographics</div>
+                <div class="filter-tags">
+                    <div class="filter-tag">Gender</div>
+                    <div class="filter-tag">Location</div>
+                    <div class="filter-tag">Role</div>
+                    <div class="filter-tag">Religion</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Slide 13: Area_Chart_For_Trends -->
+<div class="slide-container theme-dark" id="slide13">
+    <h2 class="slide-title">Longitudinal Impact</h2>
+    <div class="content-area">
+        <div class="area-chart-container">
+            <svg class="area-chart-svg" viewBox="0 0 1000 350">
+                <!-- Grid Lines -->
+                <g class="grid">
+                    <line x1="0" y1="50" x2="1000" y2="50"></line>
+                    <line x1="0" y1="125" x2="1000" y2="125"></line>
+                    <line x1="0" y1="200" x2="1000" y2="200"></line>
+                    <line x1="0" y1="275" x2="1000" y2="275"></line>
+                    <line x1="0" y1="350" x2="1000" y2="350"></line>
+                </g>
+
+                <!-- Line 1: Orange -->
+                <polyline class="line-stroke-1" points="0,250 250,150 500,220 750,100 1000,60"></polyline>
+                
+                <!-- Line 2: Teal -->
+                <polyline class="line-stroke-2" points="0,300 250,280 500,180 750,150 1000,120"></polyline>
+
+                <!-- Data Points -->
+                <g class="data-points">
+                    <!-- Line 1 -->
+                    <circle class="data-point-1" cx="0" cy="250" r="6"></circle>
+                    <circle class="data-point-1" cx="250" cy="150" r="6"></circle>
+                    <circle class="data-point-1" cx="500" cy="220" r="6"></circle>
+                    <circle class="data-point-1" cx="750" cy="100" r="6"></circle>
+                    <circle class="data-point-1" cx="1000" cy="60" r="6"></circle>
+                    
+                    <!-- Line 2 -->
+                    <circle class="data-point-2" cx="0" cy="300" r="6"></circle>
+                    <circle class="data-point-2" cx="250" cy="280" r="6"></circle>
+                    <circle class="data-point-2" cx="500" cy="180" r="6"></circle>
+                    <circle class="data-point-2" cx="750" cy="150" r="6"></circle>
+                    <circle class="data-point-2" cx="1000" cy="120" r="6"></circle>
+                </g>
+
+                <!-- Axis Labels -->
+                <g class="axis-labels y-axis-labels">
+                    <text x="-15" y="55">5</text>
+                    <text x="-15" y="130">4</text>
+                    <text x="-15" y="205">3</text>
+                    <text x="-15" y="280">2</text>
+                    <text x="-15" y="355">1</text>
+                </g>
+                <g class="axis-labels x-axis-labels">
+                    <text x="0" y="380">Phase A</text>
+                    <text x="250" y="380">Phase B</text>
+                    <text x="500" y="380">Phase C</text>
+                    <text x="750" y="380">Phase D</text>
+                    <text x="1000" y="380">Phase E</text>
+                </g>
+            </svg>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 14: Section Title 3 (Diagonal Approach) -->
+<div class="slide-container theme-dark section-diagonal-layout" id="slide14">
+    <div class="image-layer">
+        <img src="https://raw.githubusercontent.com/karolina-afk/Pam-logos/main/Gemini_Generated_Image_e74p8se74p8se74p.png" alt="Abstract approach image">
+        <div class="image-overlay"></div>
+    </div>
+    <!-- Diagonal Line Accent -->
+    <svg class="diagonal-edge" viewBox="0 0 1280 720">
+        <line x1="426.66" y1="0" x2="960" y2="720" stroke="#E59500" stroke-width="2" />
+    </svg>
+    <div class="content-layer">
+        <img src="https://raw.githubusercontent.com/karolina-afk/Pam-logos/main/Untitled%20(3).png" class="brand-logo" alt="PCL Logo">
+        <p class="subtitle" style="margin-bottom: 10px;">Section Three:</p>
+        <h2>Our Approach</h2>
+    </div>
+</div>
+
+<!-- Slide 15: Full_Background_Image (Quote Master) -->
+<div class="slide-container full-bg-image" id="slide15" style="background-image: url('https://raw.githubusercontent.com/karolina-afk/Pam-logos/main/Gemini_Generated_Image_2i266j2i266j2i26.png');">
+    <div class="content-overlay">
+        <div class="quote-layout">
+            <blockquote style="color: #EFE9E7;">Connection is not a feeling.<br>It's a discipline.</blockquote>
+            <cite style="color: #E59500;">We help leaders build it.</cite>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 16: Q&A (Closing Master) -->
+<div class="slide-container theme-light" id="slide16">
+    <div class="qa-layout">
+        <img src="https://raw.githubusercontent.com/karolina-afk/Pam-logos/main/Untitled%20(3).png" class="brand-logo" alt="PCL Logo">
+        <h2>People Centric<br>Leadership.</h2>
+        <p class="subtitle">Rooted in evidence. Built for connection.</p>
+        <div class="contact-info">
+            <br>
+            <strong>The Innovation Hub</strong><br>
+            24-40 Insight Road, London W12 9JW<br>
+            <br>
+            01234 567890<br>
+            hello@peoplecentric.com<br>
+            peoplecentric.com
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
