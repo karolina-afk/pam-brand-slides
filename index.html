@@ -16,7 +16,7 @@
 
         p {
             margin: 0;
-            margin-bottom: 15px;
+            margin-bottom: 18px;
         }
 
         body {
@@ -34,7 +34,7 @@
             align-items: flex-start;
             background-color: #EFE9E7;
             border-radius: 0px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
             display: flex;
             flex-direction: column;
             font-family: 'Lora', serif;
@@ -103,6 +103,7 @@
             margin: 0;
             padding: 0;
             text-align: left;
+            letter-spacing: -0.01em;
         }
 
         .theme-dark h1,
@@ -127,14 +128,12 @@
         .slide-container .bar .label,
         .slide-container th,
         .slide-container td,
-        .slide-container .alternating-text-tile p,
-        .slide-container .bleed-text-side p,
-        .slide-container cite,
         .slide-container .contact-info {
             color: #132A13;
             font-family: 'Lora', serif;
             font-weight: 400;
             text-align: left;
+            letter-spacing: 0.01em;
         }
 
         .theme-dark p,
@@ -146,9 +145,6 @@
         .theme-dark .bar .label,
         .theme-dark th,
         .theme-dark td,
-        .theme-dark .alternating-text-tile p,
-        .theme-dark .bleed-text-side p,
-        .theme-dark cite,
         .theme-dark .contact-info,
         .theme-accent p,
         .theme-accent li,
@@ -159,9 +155,6 @@
         .theme-accent .bar .label,
         .theme-accent th,
         .theme-accent td,
-        .theme-accent .alternating-text-tile p,
-        .theme-accent .bleed-text-side p,
-        .theme-accent cite,
         .theme-accent .contact-info {
             color: #EFE9E7;
             opacity: 0.9;
@@ -169,23 +162,23 @@
 
         .slide-container h1 {
             font-size: 84px;
-            line-height: 1.1;
-            margin-bottom: 20px;
+            line-height: 1.05;
+            margin-bottom: 24px;
         }
 
         .slide-container .slide-title {
             font-size: 56px;
             font-weight: 500;
-            margin-bottom: 40px;
+            margin-bottom: 45px;
             padding-bottom: 20px;
-            border-bottom: 1px solid rgba(19, 42, 19, 0.25);
+            border-bottom: 1px solid rgba(19, 42, 19, 0.15); /* Thin underline for standard headings */
             width: 100%;
-            line-height: 1.2;
+            line-height: 1.15;
         }
 
         .theme-dark .slide-title,
         .theme-accent .slide-title {
-            border-bottom: 1px solid rgba(239, 233, 231, 0.25);
+            border-bottom: 1px solid rgba(239, 233, 231, 0.15);
         }
 
         .slide-container h3 {
@@ -200,16 +193,16 @@
         .slide-container th,
         .slide-container td {
             font-size: 20px;
-            line-height: 1.6;
+            line-height: 1.65;
         }
 
         .slide-container .subtitle {
-            font-size: 28px;
+            font-size: 30px;
             font-weight: 400;
             margin: 0; 
             padding: 0;
             font-style: italic;
-            opacity: 0.8;
+            opacity: 0.85;
         }
 
         .slide-container .content-area {
@@ -301,21 +294,22 @@
             align-items: flex-start;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 60px;
+            gap: 70px;
             width: 100%;
         }
 
         .two-column.tiled {
             align-items: stretch;
-            gap: 40px;
+            gap: 60px;
         }
 
         .two-column.tiled > div {
             padding: 40px;
             text-align: left;
-            border-top: none; 
+            border-top: none; /* Removed top border lines */
         }
 
+        /* Restored Box Backgrounds for standard columns */
         .theme-light .two-column.tiled > div {
             background-color: rgba(255, 255, 255, 0.4);
             border: 1px solid rgba(19, 42, 19, 0.1);
@@ -351,48 +345,27 @@
             font-weight: bold;
         }
 
-        .image-wrapper {
-            height: 400px;
-            max-width: 100%;
-            overflow: hidden;
-            width: 100%;
-        }
-
-        .image-wrapper img {
-            height: 100%;
-            max-width: 100%;
-            object-fit: cover;
-            width: 100%;
-        }
-
-        .rounded-image-layout {
-            align-items: center;
-        }
-
-        .rounded-image-layout .image-wrapper {
-            border-radius: 50%;
-            flex-shrink: 0;
-            height: 380px;
-            width: 380px;
-            max-width: 380px;
-            margin: 0 auto;
-            border: 4px solid #E59500;
-            padding: 10px;
-        }
-
-        .rounded-image-layout .image-wrapper img {
-            border-radius: 50%;
-            object-fit: cover;
-            height: 100%;
-            width: 100%;
-        }
-
         .slide-container.bleed-image-layout {
             align-items: start;
             display: grid;
             gap: 0;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
             padding: 0;
+        }
+
+        .slide-container.bleed-image-layout.image-left {
+            grid-template-columns: 1fr 2fr;
+        }
+
+        .slide-container.bleed-image-layout.image-left .image-container {
+            border-right: 4px solid #E59500; /* Golden line at inner edge */
+        }
+
+        .slide-container.bleed-image-layout.image-right {
+            grid-template-columns: 2fr 1fr;
+        }
+
+        .slide-container.bleed-image-layout.image-right .image-container {
+            border-left: 4px solid #E59500; /* Golden line at inner edge */
         }
 
         .slide-container.bleed-image-layout > .content-container {
@@ -422,6 +395,103 @@
             flex-direction: column;
             justify-content: center;
             text-align: left;
+        }
+
+        /* --- BIO SPLIT LAYOUT SPECIFICS --- */
+        .name-stripe {
+            position: absolute;
+            bottom: 80px; 
+            left: 0;
+            width: 100%;
+            background-color: #132A13; /* Evergreen */
+            padding: 20px 30px;
+            display: flex;
+            flex-direction: column; /* Stacked to fit 1/3 column width */
+            align-items: flex-start;
+            gap: 5px;
+            border-top: 3px solid #E59500; /* Golden Orange accent border */
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4); /* Strong drop shadow for depth */
+        }
+        
+        .name-stripe .title {
+            color: #E59500; /* Golden Orange */
+            font-family: 'Lora', serif;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .name-stripe .name {
+            color: #EFE9E7;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 26px;
+            line-height: 1;
+        }
+        
+        .bio-text-wrapper {
+            background-color: #FFFFFF;
+            border-left: 4px solid #132A13;
+            box-shadow: 0 15px 35px rgba(19, 42, 19, 0.06);
+            padding: 40px;
+            margin-bottom: 50px;
+            width: 100%;
+        }
+        
+        .bio-text-wrapper p {
+            font-size: 18px;
+            line-height: 1.6;
+            color: #132A13;
+            margin-bottom: 15px;
+        }
+        
+        .bio-text-wrapper p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .bio-icon-row {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            padding: 0 30px;
+        }
+        
+        .bio-icon-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .bio-open-ring {
+            position: relative;
+            width: 76px;
+            height: 76px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .bio-open-ring::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            border: 4px solid #132A13;
+            border-top-color: transparent;
+            transform: rotate(45deg);
+        }
+        
+        .bio-open-ring i {
+            font-size: 28px;
+            color: #E59500;
+        }
+        
+        .bio-icon-item span {
+            font-family: 'Lora', serif;
+            font-size: 15px;
+            color: #132A13;
+            font-weight: 500;
         }
 
         .tiled-content {
@@ -459,27 +529,45 @@
         }
 
         .stat-card {
-            background-color: #FFFFFF;
-            border: 1px solid rgba(19, 42, 19, 0.1);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
-            padding: 50px 40px;
+            background: linear-gradient(145deg, #132A13 0%, #1a3a1a 100%);
+            border: none;
+            border-top: 5px solid #E59500;
+            border-radius: 24px;
+            box-shadow: 0 25px 45px rgba(19, 42, 19, 0.22); 
+            padding: 60px 40px;
             text-align: center;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::after {
+            content: '';
+            position: absolute;
+            bottom: -40px;
+            left: -40px;
+            width: 160px;
+            height: 160px;
+            background: radial-gradient(circle, rgba(107, 162, 146, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
         }
 
         .theme-dark .stat-card {
-            background-color: rgba(239, 233, 231, 0.05);
+            background: rgba(239, 233, 231, 0.05);
             border-color: rgba(239, 233, 231, 0.1);
         }
 
         .highlight-numbers-layout .number {
             color: #E59500;
-            font-size: 160px;
+            font-size: 150px;
             line-height: 1;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
+            position: relative;
+            z-index: 2;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.15);
         }
 
         .theme-dark .highlight-numbers-layout .number {
@@ -487,8 +575,11 @@
         }
 
         .highlight-numbers-layout .number-label {
-            font-size: 28px;
+            font-size: 26px;
             font-style: italic;
+            color: #EFE9E7 !important;
+            position: relative;
+            z-index: 2;
         }
 
         .quote-layout {
@@ -503,6 +594,7 @@
             margin: 0 0 30px 0;
             position: relative;
             text-align: center;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3); 
         }
 
         .quote-layout cite {
@@ -510,7 +602,8 @@
             text-align: center;
             font-size: 24px;
             font-style: italic;
-            opacity: 0.8;
+            opacity: 0.9;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
         }
 
         /* Designer Overlapping Chart for Slide 12 */
@@ -525,7 +618,7 @@
         .chart-card {
             background-color: #FFFFFF;
             padding: 40px;
-            box-shadow: 0 20px 40px rgba(19, 42, 19, 0.08);
+            box-shadow: 0 20px 40px rgba(19, 42, 19, 0.08); 
             border-top: 4px solid #132A13;
             flex-grow: 1;
             display: flex;
@@ -580,7 +673,7 @@
         
         .dc-grid-line {
             width: 100%;
-            border-top: 1px dashed rgba(107, 162, 146, 0.4);
+            border-top: 1px dashed rgba(107, 162, 146, 0.4); 
         }
         
         .dc-columns {
@@ -588,7 +681,7 @@
             justify-content: space-around;
             align-items: flex-end;
             width: 100%;
-            height: calc(100% - 75px);
+            height: calc(100% - 75px); 
             margin-top: 40px; 
             position: relative;
             z-index: 1;
@@ -615,9 +708,9 @@
         .dc-importance {
             position: absolute;
             bottom: 0;
-            width: 36px;
+            width: 36px; 
             background: linear-gradient(180deg, #132A13 0%, #204020 100%);
-            box-shadow: 4px 0 15px rgba(19, 42, 19, 0.25);
+            box-shadow: 4px 0 15px rgba(19, 42, 19, 0.25); 
             display: flex;
             justify-content: center;
         }
@@ -630,7 +723,7 @@
             font-family: 'Cormorant Garamond', serif;
             font-size: 28px;
             font-weight: 600;
-            color: #E59500;
+            color: #E59500; 
         }
         
         .dc-x-label {
@@ -737,6 +830,68 @@
             border-color: #E59500;
             font-weight: 600;
             box-shadow: 0 4px 10px rgba(229, 149, 0, 0.2);
+        }
+
+        /* --- DARK THEME DASHBOARD OVERRIDES (Slide 12) --- */
+        .theme-dark .chart-card,
+        .theme-dark .chart-sidebar {
+            background-color: rgba(107, 162, 146, 0.08); /* Transparent green/teal blend */
+            border: 1px solid rgba(107, 162, 146, 0.25);
+            box-shadow: none;
+            border-top: 4px solid #6BA292;
+            backdrop-filter: blur(10px); /* Premium dashboard glass effect */
+        }
+        
+        .theme-dark .chart-card-title,
+        .theme-dark .filter-header {
+            color: #EFE9E7;
+            border-bottom: 1px solid rgba(239, 233, 231, 0.15);
+        }
+        
+        .theme-dark .dc-y-axis,
+        .theme-dark .dc-x-label,
+        .theme-dark .dc-legend-item {
+            color: #EFE9E7;
+            opacity: 0.85;
+        }
+        
+        .theme-dark .dc-grid-line {
+            border-top: 1px dashed rgba(239, 233, 231, 0.15);
+        }
+        
+        .theme-dark .dc-importance {
+            background: linear-gradient(180deg, #EFE9E7 0%, #D1CFC9 100%);
+            box-shadow: 4px 0 15px rgba(0, 0, 0, 0.4); /* Stronger shadow for dark mode depth */
+        }
+        
+        .theme-dark .dc-presence {
+            background-color: rgba(107, 162, 146, 0.25);
+            border: 1px solid rgba(107, 162, 146, 0.5);
+            border-bottom: none;
+        }
+        
+        .theme-dark .dc-legend-imp {
+            background-color: #EFE9E7;
+        }
+        
+        .theme-dark .filter-group-title {
+            color: #E59500; /* Golden Orange pops on dark green */
+        }
+        
+        .theme-dark .filter-tag {
+            color: #EFE9E7;
+            border-color: rgba(239, 233, 231, 0.25);
+        }
+        
+        .theme-dark .filter-tag.active {
+            background-color: #EFE9E7;
+            color: #132A13;
+            border-color: #EFE9E7;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .theme-dark .filter-tag.active-secondary {
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
         }
 
         .area-chart-container {
@@ -884,21 +1039,35 @@
     </div>
 </div>
 
-<!-- Slide 4: Rounded_Image_and_Text (Headshot/Bio Template) -->
-<div class="slide-container theme-light" id="slide4">
-    <h2 class="slide-title">Leadership Team</h2>
-    <div class="content-area">
-        <div class="two-column rounded-image-layout">
-            <div>
-                <div class="image-wrapper">
-                    <img src="https://raw.githubusercontent.com/karolina-afk/Pam-logos/main/casey-horner-OopzSWabsWE-unsplash.jpg" alt="Professional candid headshot of a woman">
-                </div>
+<!-- Slide 4: Leadership Team (Axia Structure Adaptation) -->
+<div class="slide-container bleed-image-layout image-left theme-light" id="slide4">
+    <div class="image-container" style="position: relative;">
+        <img class="bleed-image-side" src="https://raw.githubusercontent.com/karolina-afk/Pam-logos/main/casey-horner-OopzSWabsWE-unsplash.jpg" alt="Pamela Doherty">
+        <div class="name-stripe">
+            <span class="title">CEO</span>
+            <span class="name">Pamela Doherty</span>
+        </div>
+    </div>
+    <div class="content-container" style="padding-left: 60px; padding-right: 60px;">
+        <h2 class="slide-title" style="margin-bottom: 30px; border-bottom: none; padding-bottom: 0;">Leadership Team</h2>
+        
+        <div class="bio-text-wrapper">
+            <p>PCL carries the poise of a seasoned leader and the soul of a storyteller. We listen to what people truly value, observe what they tell us without judgement, and equip people to connect with each other through credible evidence.</p>
+            <p>Pamela's conviction, built over decades of leadership experience, is that understanding what people truly value is one of the most powerful tools we have for bringing people together.</p>
+        </div>
+
+        <div class="bio-icon-row">
+            <div class="bio-icon-item">
+                <div class="bio-open-ring"><i class="fa-solid fa-eye"></i></div>
+                <span>Value 1</span>
             </div>
-            <div>
-                <h3>Pamela Doherty</h3>
-                <p style="font-style: italic; margin-bottom: 20px;">Chief Executive Officer.</p>
-                <p>PCL carries the poise of a seasoned leader and the soul of a storyteller. We listen to what people truly value, observe what they tell us without judgement, and equip people to connect with each other through credible evidence.</p>
-                <p>Pamela's conviction, built over decades of leadership experience, is that understanding what people truly value is one of the most powerful tools we have for bringing people together.</p>
+            <div class="bio-icon-item">
+                <div class="bio-open-ring"><i class="fa-solid fa-people-arrows"></i></div>
+                <span>Value 2</span>
+            </div>
+            <div class="bio-icon-item">
+                <div class="bio-open-ring"><i class="fa-solid fa-chart-pie"></i></div>
+                <span>Value 3</span>
             </div>
         </div>
     </div>
@@ -970,7 +1139,7 @@
 </div>
 
 <!-- Slide 8: Bleed_Image_Right (1/2 Split Layout) -->
-<div class="slide-container bleed-image-layout theme-light" id="slide8">
+<div class="slide-container bleed-image-layout image-right theme-light" id="slide8">
     <div class="content-container">
         <h2 class="slide-title">See the Whole Person</h2>
         <div class="content-area">
@@ -1007,17 +1176,17 @@
     <h2 class="slide-title">Brand Matrix</h2>
     <div class="content-area">
         <div class="tiled-content">
-            <div class="tile">
+            <div class="tile" style="border-top: none;">
                 <div class="icon"><i class="fa-solid fa-book-open"></i></div>
                 <h3>As Product</h3>
                 <p>Freely accessible, evidence-first research reports and leadership insights. Workshops, advisory sessions, and youth outreach tools bridging research and consultancy.</p>
             </div>
-            <div class="tile">
+            <div class="tile" style="border-top: none;">
                 <div class="icon"><i class="fa-solid fa-users"></i></div>
                 <h3>As Organisation</h3>
                 <p>Independent, self-funded, values-aligned partnerships only. Cross-sector, multi-generational reach with proactive audience-seeking.</p>
             </div>
-            <div class="tile">
+            <div class="tile" style="border-top: none;">
                 <div class="icon"><i class="fa-solid fa-compass"></i></div>
                 <h3>Personality</h3>
                 <p>Grounded warmth, quiet courage, purposeful restraint. Human precision paired with humble authority and an exploratory spirit.</p>
@@ -1044,7 +1213,7 @@
 </div>
 
 <!-- Slide 12: Designer Overlapping Bar Chart -->
-<div class="slide-container theme-light" id="slide12">
+<div class="slide-container theme-dark" id="slide12">
     <h2 class="slide-title" style="font-size: 42px;">Importance and experience of workplace values.</h2>
     <div class="content-area" style="justify-content: flex-start; padding-top: 10px;">
         
@@ -1062,7 +1231,7 @@
                         <div class="dc-grid-line"></div>
                         <div class="dc-grid-line"></div>
                         <div class="dc-grid-line"></div>
-                        <div class="dc-grid-line" style="border-top: 1px solid rgba(19, 42, 19, 0.2);"></div>
+                        <div class="dc-grid-line" style="border-top: 1px solid rgba(239, 233, 231, 0.3);"></div>
                     </div>
                     
                     <div class="dc-columns">
